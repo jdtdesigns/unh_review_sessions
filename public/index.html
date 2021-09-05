@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Job App</title>
+</head>
+<body>
+     <div id="form-container">
+          <h1>It works!</h1>
+          
+          <form id="job-form">
+               <input id="title" type="text" name="title" placeholder="Type your job title">
+               <!-- <input type="text" name="another"> -->
+               <button>Submit</button>
+          </form>
+     </div>
+
+
+     <h3 id="title-container" style="display: none;">Job Title: <span id="title"></span></h3>
+     
+     <script>
+          const titleEl = document.getElementById('title');
+          const formEl = document.getElementById('job-form');
+          
+          // req.body.title
+          formEl.addEventListener('submit', function(event) {
+               const job_title = titleEl.value;
+               event.preventDefault();
+               
+               // console.log('title', job_title);
+
+               fetch('/api/job', {
+                    method: 'POST',
+                    body: JSON.stringify({job_title}),
+                    headers: {
+                         'Content-Type': 'application/json'
+                    }
+               })
+                    .then((res) => {
+                         // res.json parses the json object from the backend and gives you a JS object literal
+                         return res.json() // res must have an object as the data value
+                    })
+                    .then((job_data) => {
+                         console.log(job_data);
+                         titleEl.textContent = job_data.title;
+                    });
+          });
+          // GET request to /job
+          
+
+
+
+
+     </script>
+</body>
+</html>
