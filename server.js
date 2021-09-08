@@ -5,7 +5,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 // express returns an Object
 
-console.log(path.join(__dirname, './index.html'));
+// console.log(path.join(__dirname, './index.html'));
 
 const app = express(); // instance = Object
 // properties and methods
@@ -33,15 +33,22 @@ app.use(express.urlencoded({ extended: true }));
 // job.html is loaded and the JS is ran and we send the '/api/job' GET request to the backend
 // app.get('/api/job') is called and we send job title
 
-let job_data;
+let job_data = [];
 
-//'/:title'
+
 app.post('/api/job', (req, res) => {
-  job_data = req.body;
+  job_data.push(req.body.company);
+  console.log('post route')
   console.log(req.body);
   // Send user? Call a route
   res.send('Completed!');
 });
+
+
+
+
+
+
 
 app.get('/job', (req, res) => {
   res.sendFile(path.join(__dirname, './public/job.html'));
@@ -55,7 +62,7 @@ app.listen(PORT, function () {
   console.log('Server running on port 3000');
 });
 
-// Using Frameworks and Boilerplate
+
 
 
 
