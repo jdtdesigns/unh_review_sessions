@@ -193,3 +193,16 @@ const prom = new PromiseClone(function (resolve, reject) {
 // something(() => {
 //   console.log('test');
 // });
+
+// const submitBtn = document.querySelector('body > header > h2');
+// const myFunc = async () => {
+//   console.log('myFunc');
+// };
+
+// myFunc();
+
+function somethingElse() {
+  const someData = await fetch('/api/someplace');
+}
+somethingElse();
+console.log('after');

@@ -4,20 +4,44 @@
   const formContainer = document.getElementById('form-container');
   const jobsContainer = document.getElementById('jobs-container');
   const submitBtn = document.getElementById('show-jobs');
-  // const submitBtn = document.querySelector('body > header > h2');
+  const jobsList = document.getElementById('jobs-list');
+  let show_jobs = false;
+
 
   submitBtn.addEventListener('click', function (event) {
-    formContainer.classList.add('hide');
-    jobsContainer.classList.remove('hide');
+    // If show_jobs is false, we are currently on the form view
+    if (show_jobs === false) {
+      fetch('/api/jobs')
+        .then((res) => {
+          return res.json();
+        })
+        .then((jobs) => {
+          jobsList.innerHTML = '';
 
-    fetch('/api/jobs')
-      .then(() => {
+          jobs.forEach((job) => {
+            const jobEl = document.createElement('li');
 
-      });
+            jobEl.textContent = job;
+            jobsList.appendChild(jobEl);
+          });
+
+          show_jobs = true;
+          submitBtn.innerText = 'Show Form';
+          formContainer.classList.add('hide');
+          jobsContainer.classList.remove('hide');
+        });
+    } else {
+      show_jobs = false;
+      submitBtn.innerText = 'Show Jobs';
+      formContainer.classList.remove('hide');
+      jobsContainer.classList.add('hide');
+    }
+
+
   }); // method is a function
 
   formEl.addEventListener('submit', function (event) {
-    const company = titleEl.value;
+    let company = titleEl.value;
     event.preventDefault();
 
 
@@ -29,9 +53,13 @@
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(() => {
-      alert(`${company} has been added!`);
-    });
+    })
+      .then(() => {
+        alert(`${company} has been added!`);
+      })
+      .then(() => {
+        titleEl.value = '';
+      });
 
   });
 
