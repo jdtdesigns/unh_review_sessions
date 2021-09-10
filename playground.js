@@ -206,3 +206,28 @@ function somethingElse() {
 }
 somethingElse();
 console.log('after');
+
+
+
+
+// const data = {
+//   name: 'bob',
+//   age: 30
+// };
+
+// const another = {
+//   title: 'work',
+//   something: 'blah'
+// }
+
+// const arr = ['apple', 'orange'];
+
+// const obj = { ...data };
+
+// const newArr = [...arr];
+
+// console.log(obj);
+
+
+
+

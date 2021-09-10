@@ -7,7 +7,7 @@
   const jobsList = document.getElementById('jobs-list');
   let show_jobs = false;
 
-
+  // Show Jobs Button Listener - Get all jobs and then show the Jobs List
   submitBtn.addEventListener('click', function (event) {
     // If show_jobs is false, we are currently on the form view
     if (show_jobs === false) {
@@ -21,7 +21,7 @@
           jobs.forEach((job) => {
             const jobEl = document.createElement('li');
 
-            jobEl.textContent = job;
+            jobEl.textContent = job.company;
             jobsList.appendChild(jobEl);
           });
 
