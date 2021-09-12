@@ -7,8 +7,11 @@ function App() {
 
   function switchView(event) {
     setShowJobs(!showJobs);
+    fetch('/api/jobs')
+      .then(() => {
+        setCompany('');
+      });
 
-    setCompany('');
   }
 
   function inputCallback(event) {
