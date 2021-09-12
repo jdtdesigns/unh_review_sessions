@@ -1,0 +1,53 @@
+/* Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+header {
+  padding: 7px 3%;
+}
+
+header button {
+  padding: 0 9px;
+}
+
+/* Custom Classes */
+
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-space {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+/* Element Styles */
+
+#job-form, #jobs-container {
+  max-width: 20%;
+  margin: 0 auto;
+}
+
+#job-form > * {
+  padding: 10px;
+  margin: 10px 0;
+}

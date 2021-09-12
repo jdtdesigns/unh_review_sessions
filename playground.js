@@ -1,14 +1,14 @@
 // Callback Hell - function vs arrow
-function solution() {
-  const new_promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('done!');
-      // reject('some err');
-    }, 3000);
-  });
+// function solution() {
+//   const new_promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve('done!');
+//       // reject('some err');
+//     }, 3000);
+//   });
 
-  return new_promise;
-}
+//   return new_promise;
+// }
 
 // solution()
 //   .then(result => {
@@ -43,20 +43,20 @@ function solution() {
 
 // console.log(jd.age);
 
-class Person {
+// class Person {
 
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age;
+//   }
 
-  haveBirthday() {
-    this.age++;
-    // return this.age;
-    // console.log('something');
-  }
+//   haveBirthday() {
+//     this.age++;
+//     // return this.age;
+//     // console.log('something');
+//   }
 
-}
+// }
 
 // const jd = new Person('JD', 41);
 
@@ -107,58 +107,58 @@ class Person {
 
 // const jd = new Person('jd', 41);
 
-class PromiseClone {
-  constructor(cb) {
-    // create an initial storable list of then actions
-    this.thenChain = [];
+// class PromiseClone {
+//   constructor(cb) {
+//     // create an initial storable list of then actions
+//     this.thenChain = [];
 
-    // ensure that the resolve and reject functions passed to our callback are bound to 
-    // the parent object that is created
-    this.resolve = this.resolve.bind(this);
-    this.reject = this.reject.bind(this);
+//     // ensure that the resolve and reject functions passed to our callback are bound to 
+//     // the parent object that is created
+//     this.resolve = this.resolve.bind(this);
+//     this.reject = this.reject.bind(this);
 
-    // we lose scope to our parent object here unless we .bind()
-    cb(this.resolve, this.reject);
-  }
+//     // we lose scope to our parent object here unless we .bind()
+//     cb(this.resolve, this.reject);
+//   }
 
-  resolve(passed_value) {
-    let val = passed_value;
-    // Create a loop to handle chained .then() calls
-    console.log('resolve'); // watch the order in which this runs
+//   resolve(passed_value) {
+//     let val = passed_value;
+//     // Create a loop to handle chained .then() calls
+//     console.log('resolve'); // watch the order in which this runs
 
-    this.thenChain.forEach(nextAction => {
-      console.log('action', nextAction);
-      val = nextAction(val);
-    });
-  }
+//     this.thenChain.forEach(nextAction => {
+//       console.log('action', nextAction);
+//       val = nextAction(val);
+//     });
+//   }
 
-  reject(err) {
-    // handle errors
-  }
+//   reject(err) {
+//     // handle errors
+//   }
 
-  then(handleSuccess) {
-    // push the next action to our loop to process
-    console.log('then', handleSuccess);
-    this.thenChain.push(handleSuccess);
+//   then(handleSuccess) {
+//     // push the next action to our loop to process
+//     console.log('then', handleSuccess);
+//     this.thenChain.push(handleSuccess);
 
-    // return the parent object so you can then call .then()'s in a chain
-    return this;
-  }
+//     // return the parent object so you can then call .then()'s in a chain
+//     return this;
+//   }
 
-  catch() {
-    // handle errors
-  }
-}
+//   catch() {
+//     // handle errors
+//   }
+// }
 
-const prom = new PromiseClone(function (resolve, reject) {
-  // Simulate an API call which would be delayed
-  setTimeout(function () {
-    resolve('Initial resolved value');
-  }, 3000);
-}).then(initial_val => {
-  console.log(initial_val);
-  return 'passed val';
-}).then((passed) => console.log(passed));
+// const prom = new PromiseClone(function (resolve, reject) {
+//   // Simulate an API call which would be delayed
+//   setTimeout(function () {
+//     resolve('Initial resolved value');
+//   }, 3000);
+// }).then(initial_val => {
+//   console.log(initial_val);
+//   return 'passed val';
+// }).then((passed) => console.log(passed));
 
 
 
@@ -183,7 +183,7 @@ const prom = new PromiseClone(function (resolve, reject) {
 // }
 
 // testing();
-
+1
 
 // function something(asdfasdfadsfasdfdasfsdf) {
 //   asdfasdfadsfasdfdasfsdf();
@@ -201,11 +201,11 @@ const prom = new PromiseClone(function (resolve, reject) {
 
 // myFunc();
 
-function somethingElse() {
-  const someData = await fetch('/api/someplace');
-}
-somethingElse();
-console.log('after');
+// function somethingElse() {
+//   const someData = await fetch('/api/someplace');
+// }
+// somethingElse();
+// console.log('after');
 
 
 
@@ -231,3 +231,17 @@ console.log('after');
 
 
 
+function myFunc(a, b, c, d) {
+  // console.log(d);
+  d();
+}
+
+
+myFunc(5, 'JD', [3, 5, 7], function () { console.log('callback') });
+
+
+// function another() {
+//   console.log('another');
+// }
+
+// another();
