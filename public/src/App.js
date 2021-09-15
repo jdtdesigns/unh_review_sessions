@@ -1,49 +1,48 @@
 import { useState } from 'react';
+import Header from './components/Header';
+import JobsList from './components/JobsList';
+import FormContainer from './components/FormContainer';
 
 
 function App() {
-  const [company, setCompany] = useState(''); // useState gives you 2 things - val, function to update that value
+  // useState gives you 2 things - val, function to update that value
+  const [company, setCompany] = useState('');
   const [showJobs, setShowJobs] = useState(false);
+  const [count, setCount] = useState(0);
+  const [jobs, setJobs] = useState([]);
 
-  function switchView(event) {
+  function switchView() {
+
+    if (!showJobs) {
+      fetch('/api/jobs')
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setJobs(data);
+        });
+    }
+
     setShowJobs(!showJobs);
-    fetch('/api/jobs')
-      .then(() => {
-        setCompany('');
-      });
-
   }
 
   function inputCallback(event) {
     setCompany(event.target.value);
-    // console.log();
   }
+
 
   return (
     <main>
-      <header className="row justify-space">
-        <h2>Job Tracker</h2>
-        <button onClick={switchView}>{showJobs ? 'Show Form' : 'Show Jobs'}</button>
-      </header>
+
+      <Header setCount={setCount} count={count} showJobs={showJobs} switchView={switchView} />
 
       <p>{company}</p>
 
       {showJobs ?
         (
-          <div id="jobs-container">
-            <h1 className="text-center">Jobs List</h1>
-            <ul id="jobs-list">
-            </ul>
-          </div>
+          <JobsList jobs={jobs} />
         ) : (
-          <div id="form-container">
-            <form id="job-form" className="column">
-              <h2 className="text-center">Create Job Form</h2>
-              <input onChange={inputCallback} value={company} type="text" name="company" placeholder="Type your company name" />
-
-              <button>Submit</button>
-            </form>
-          </div>
+          <FormContainer switchView={switchView} setCompany={setCompany} count={count} inputCallback={inputCallback} company={company} />
         )}
 
     </main>

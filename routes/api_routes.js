@@ -1,5 +1,7 @@
 const Job = require('../models/Job');
 
+// Job.deleteMany({}).then(() => console.log('removed'));
+
 // app const from server.js gets passed to our routeCreate function
 function routeCreate(app) {
    // API ROUTES
