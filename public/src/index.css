@@ -17,6 +17,23 @@ header button {
   padding: 0 9px;
 }
 
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+a:not(:last-child) {
+  margin-right: 5px;
+}
+
+a.active {
+  text-decoration: underline;
+}
+
+li button {
+  margin-left: 10px;
+}
+
 /* Custom Classes */
 
 .row {

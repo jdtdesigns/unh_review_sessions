@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Header(props) {
    return (
@@ -8,7 +9,12 @@ function Header(props) {
          {/* <button onClick={() => {
             props.setCount(props.count + 1);
          }}>Increase Count</button> */}
-         <button onClick={props.switchView}>{props.showJobs ? 'Show Form' : 'Show Jobs'}</button>
+         <nav>
+            <NavLink exact to="/">Home</NavLink>
+            <NavLink to="/form">Show Form</NavLink>
+
+            {/* <button onClick={props.switchView}>{props.showJobs ? 'Show Form' : 'Show Jobs'}</button> */}
+         </nav>
       </header>
    )
 }

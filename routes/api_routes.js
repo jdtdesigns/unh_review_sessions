@@ -22,6 +22,20 @@ function routeCreate(app) {
          });
    });
 
+   app.delete('/api/jobs', (req, res) => {
+      // req.body {
+      //    _id: 'asdkjwqoiwe@30192309fjnlalkmnvclkvajs'
+      // }
+      Job.deleteOne(req.body)
+         .then(() => {
+            res.status(200).send('Completed');
+         });
+   });
+
+   app.put('/api/jobs', (req, res) => {
+      console.log(req.body);
+   });
+
 }
 
 module.exports = routeCreate;

@@ -1,53 +1,49 @@
-import { useState } from 'react';
+import { useState, useContext, createContext } from 'react';
 import Header from './components/Header';
 import JobsList from './components/JobsList';
 import FormContainer from './components/FormContainer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+const Store = createContext();
 
 function App() {
-  // useState gives you 2 things - val, function to update that value
-  const [company, setCompany] = useState('');
-  const [showJobs, setShowJobs] = useState(false);
   const [count, setCount] = useState(0);
-  const [jobs, setJobs] = useState([]);
+  // useState gives you 2 things - val, function to update that value
 
-  function switchView() {
-
-    if (!showJobs) {
-      fetch('/api/jobs')
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setJobs(data);
-        });
-    }
-
-    setShowJobs(!showJobs);
-  }
-
-  function inputCallback(event) {
-    setCompany(event.target.value);
-  }
-
-
+  // using BrowserRouter outside of App component
+  // Switch
+  // exact
   return (
-    <main>
+    <Store.Provider value={{
+      count: count,
+      setCount
+    }}>
+      <BrowserRouter>
+        <Header />
 
-      <Header setCount={setCount} count={count} showJobs={showJobs} switchView={switchView} />
+        <Switch>
+          <Route exact path="/">
+            <JobsList />
+          </Route>
 
-      <p>{company}</p>
+          <Route path="/form">
+            <FormContainer />
+          </Route>
 
-      {showJobs ?
-        (
-          <JobsList jobs={jobs} />
-        ) : (
-          <FormContainer switchView={switchView} setCompany={setCompany} count={count} inputCallback={inputCallback} company={company} />
-        )}
+          <Route path="*">
+            <h1>Page Not Found</h1>
+          </Route>
+        </Switch>
 
-    </main>
+      </BrowserRouter>
+    </Store.Provider>
   );
 }
+
+export const useStore = () => {
+  return useContext(Store);
+}
+
 
 export default App;
 
