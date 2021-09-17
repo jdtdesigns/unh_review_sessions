@@ -96,7 +96,13 @@ function JobsList(props) {
                   return (
                      <li key={i}>
 
-                        {job.edit ? <input onKeyUp={((event) => closeEdit(event, job))} onChange={(event) => editJob(event, job, i)} value={job.company} type="text" /> : job.company}
+                        {job.edit ? (
+                           <input
+                              onKeyUp={((event) => closeEdit(event, job))}
+                              onChange={(event) => editJob(event, job, i)}
+                              value={job.company}
+                              type="text" />
+                        ) : job.company}
                         <button onClick={(event) => deleteJob(event, job, i)}>Delete</button>
                         <button onClick={(event) => showEditJobInput(event, job, i)}>Edit</button>
                      </li>
