@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import FormHeader from './FormHeader';
-import { useStore } from '../App';
+import { useStore } from '../store';
 
 function FormContainer() {
    const [company, setCompany] = useState('');

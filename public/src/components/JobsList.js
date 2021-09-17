@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useStore } from '../App';
+import { useStore } from '../store';
 
 function JobsList(props) {
    const [jobs, setJobs] = useState([]);

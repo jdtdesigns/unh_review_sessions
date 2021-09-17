@@ -1,23 +1,19 @@
-import { useState, useContext, createContext } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 import JobsList from './components/JobsList';
 import FormContainer from './components/FormContainer';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-const Store = createContext();
+import Provider from './store';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   // useState gives you 2 things - val, function to update that value
 
   // using BrowserRouter outside of App component
   // Switch
   // exact
   return (
-    <Store.Provider value={{
-      count: count,
-      setCount
-    }}>
+    <Provider>
       <BrowserRouter>
         <Header />
 
@@ -36,14 +32,9 @@ function App() {
         </Switch>
 
       </BrowserRouter>
-    </Store.Provider>
+    </Provider>
   );
 }
-
-export const useStore = () => {
-  return useContext(Store);
-}
-
 
 export default App;
 
